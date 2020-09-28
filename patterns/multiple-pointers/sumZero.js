@@ -17,6 +17,23 @@ const sumZero = (arr) => {
 }
 console.log(sumZero([-3, -2, 1, 3, 4]))
 
+//Solution 3
+function sumZero1(arr) {
+  // let sum = [];
+  // let left = 0;
+  // let right = arr.length - 1;
+  for (let i = 0; i < arr.length; i++) {
+    let left = i;
+    let right = arr.length - 1;
+    if (arr[left] + arr[right] === 0) {
+      return [arr[i], arr[right]];
+    }
+    // return undefined
+  }
+}
+
+console.log(sumZero1([1, 6, -2, 3, 4, -6]));
+
 // Effiecient solution
 
 function sumZeroo(arr) {

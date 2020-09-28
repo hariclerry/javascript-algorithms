@@ -55,3 +55,20 @@ function areThereDuplicates(...args) {
 function areThereDuplicates() {
   return new Set(arguments).size !== arguments.length;
 }
+
+
+function areThereDuplicates(...rest) {
+  let i = 0;
+
+  for (let j = 1; j < rest.length; j++) {
+    if (rest[j] === rest[i]) {
+      return true;
+    } else if (rest[j] !== rest[i]) {
+      i++;
+      rest[i] = rest[j];
+    }
+  }
+  return false;
+}
+
+console.log(areThereDuplicates(1, 3, 5, 7));

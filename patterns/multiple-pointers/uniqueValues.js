@@ -33,3 +33,11 @@ function countUniqueValues2(arr) {
   return i + 1;
 }
 countUniqueValues2([1, 2, 2, 5, 7, 7, 99]);
+
+// Set solution
+function countUniqueValues(arr) {
+  let result = new Set(arr);
+  console.log("settttt", result.size);
+}
+
+console.log(countUniqueValues([1, 4, 3, 4, -6, 2]));

@@ -57,6 +57,7 @@ function validAnagram(first, second) {
     if (!lookup[letter]) {
       return false;
     } else {
+      // Subtract 1 from lookup key
       lookup[letter] -= 1;
     }
   }

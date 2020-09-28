@@ -1,3 +1,4 @@
+// A function that takes two strings and checks whethere the characters in first string appears in second string in order
 // isSubsequence Solution - Iterative
 function isSubsequence(str1, str2) {
   var i = 0;

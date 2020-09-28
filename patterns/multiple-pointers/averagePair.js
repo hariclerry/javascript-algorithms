@@ -30,3 +30,19 @@ function averagePair2(arr, num){
   return false;
 }
 console.log(averagePair2([1, 3, 3, 5, 6, 7, 10, 12, 19], 8));
+
+// Third solution
+function tempClosetToZero(arr, target) {
+  let start = 0;
+  let next = 1;
+
+  while (next < arr.length) {
+    if ((arr[next] + arr[start]) / 2 === target) {
+      return true;
+    }
+    start++;
+    next++;
+  }
+
+  return false;
+}
