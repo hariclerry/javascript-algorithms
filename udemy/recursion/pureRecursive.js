@@ -1,5 +1,5 @@
 function collectOddValues(arr) {
-  let newArr = [];
+    let newArr = [];
 
     if (arr.length === 0) {
         return newArr;

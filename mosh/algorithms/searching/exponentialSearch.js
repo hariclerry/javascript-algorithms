@@ -5,5 +5,5 @@ function exponentialSearch(array, target) {
         bound *= 2;
     const left = Math.floor(bound / 2);
     const right = Math.min(bound, array.length - 1);
-    return binarySearchRec(array, target, left, right);
+    return exponentialSearch(array, target, left, right);
 }

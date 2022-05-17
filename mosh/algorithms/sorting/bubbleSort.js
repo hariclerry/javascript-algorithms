@@ -2,7 +2,22 @@
 // UNOPTIMIZED VERSION OF BUBBLE SORT
 const arr = [8, 2, 4, 1, 3]
 
-const bubbleSort = (array) => {
+// Naive solution
+const bubbleSort = (arr) => {
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr.length; j++) {
+            if (arr[j] > arr[j + 1]) {
+                swap(arr, j, j + 1);
+            }
+
+        }
+        // console.log("swap----", arr)
+    }
+    return arr;
+}
+
+// Optimised Version
+const bubbleSor1t = (array) => {
     const len = array.length
     if (len < 0) return;
 

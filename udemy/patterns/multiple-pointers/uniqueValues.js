@@ -5,17 +5,17 @@
 
 // Solution 2
 function countUniqueValues(arr) {
-    let count = 0;
+  let count = 0;
 
-    for (let i = 0; i < arr.length; i++) {
-         let next = i + 1;
-        if (arr[i] !== arr[next]) {
-          count++;
-        } 
+  for (let i = 0; i < arr.length; i++) {
+    let next = i + 1;
+    if (arr[i] !== arr[next]) {
+      count++;
     }
-    return count;
+  }
+  return count;
 
-} 
+}
 
 countUniqueValues([1, 1, 1, 1, 1, 2, 2, 4]) // 2
 
@@ -41,3 +41,29 @@ function countUniqueValues(arr) {
 }
 
 console.log(countUniqueValues([1, 4, 3, 4, -6, 2]));
+
+function countUniqueValues(arr) {
+
+  if (arr.length < 0) return false;
+  // const valueSet = new Set(arr);
+
+  // return valueSet.size;
+
+
+  const valueMap = new Map();
+
+  for (let item of arr) {
+    let val = valueMap.get(item);
+    // let c = arr[item]
+    // console.log("hereeee----", val)
+    if (val) {
+      val++
+      valueMap.set(item, val);
+    } else {
+      valueMap.set(item, 1);
+    }
+  }
+
+  return valueMap.size;
+
+}

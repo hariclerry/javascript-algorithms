@@ -10,15 +10,18 @@ function maxSubarraySum(arr, num) {
     maxSum += arr[i];
   }
   tempSum = maxSum;
-
   for (let i = num; i < arr.length; i++) {
     tempSum = tempSum - arr[i - num] + arr[i];
+
+    // if (tempSum > maxSum) {
+    //   maxSum = tempSum;
+    // }
     maxSum = Math.max(maxSum, tempSum);
   }
   return maxSum;
 }
 
-maxSubarraySum([2, 6, 9, 2, 1, 8, 5, 6, 3], 3);
+console.log(maxSubarraySum([2, 6, 9, 2, 1, 8, 5, 6, 3], 3));
 
 // Solution 2
 function maxSubarraySum1(arr, num) {
@@ -39,4 +42,4 @@ function maxSubarraySum1(arr, num) {
   return max;
 }
 
-maxSubarraySum1([2, 6, 9, 2, 1, 8, 5, 6, 3], 3);
+// maxSubarraySum1([2, 6, 9, 2, 1, 8, 5, 6, 3], 3);

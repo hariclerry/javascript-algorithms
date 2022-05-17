@@ -10,3 +10,16 @@ function naiveSearch(long, short) {
 }
 
 naiveSearch("lorie loled", "lol");
+
+
+const sumOfPair = (arr1, arr2, target) => {
+  let num = 0;
+
+  for (let i = 0; i < arr1.length; i++) {
+    for (let j = 0; i < arr2.length; j++) {
+
+    }
+  }
+}
+
+sumOfPair([8, 5, 6, 3], [2, 6, 2, 1,], 3);

@@ -147,3 +147,4 @@ const binarySearchIterative = (arr, target) => {
 }
 
 console.log("binarySearchRecursive-----", binarySearchIterative(arrElementTest2, 10))
+

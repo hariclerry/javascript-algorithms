@@ -12,3 +12,26 @@ function viralAdvertising(n) {
   return totalLikes;
 }
 console.log(viralAdvertising(5));
+
+function sockMerchant(n, ar) {
+  // Write your code here
+  if (n < 1 || n !== ar.length) {
+    return 0;
+  }
+
+  let numOfPairs = 0;
+  let obj = {};
+
+  for (let sock of ar) {
+    obj[sock] = obj[sock] ? obj[sock] + 1 : 1;
+  }
+
+  for (let item in obj) {
+    let pair = Math.floor(obj[item] / 2)
+    numOfPairs = numOfPairs + pair;
+  }
+
+  return numOfPairs;
+}
+console.log("called---", sockMerchant(11, [10, 3, 7, 5, 2, 2, 3, 5, 5, 10, 5]))
+
