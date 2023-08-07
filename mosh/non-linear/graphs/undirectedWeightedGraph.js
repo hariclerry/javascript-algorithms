@@ -43,33 +43,28 @@ class WeightedGraph {
         }
     }
 
-    //Not working as expected, check dijkstraGraph.js
     hasCycle() {
         const visited = new Map();
 
-        for (let node of this.data.values()) {
-            // console.log("hereeee----", node)
-            if (!visited.has(node) &&
-                this.hasCycleHelper(node, null, visited))
+        for (let [key, value] of this.data) {
+            if (!visited.has(key) &&
+                this.hasCycleHelper(key, null, visited))
                 return true;
         }
 
         return false;
     }
 
-    //Not working as expected, check dijkstraGraph.js
     hasCycleHelper(node, parent, visited) {
         visited.set(node);
 
-        for (let edgy of this.data.values()) {
-            for (let edge in edgy) {
-                if (edgy[edge].to == parent)
-                    continue;
+        for (let edge of this.data.get(node)) {
+            if (edge.to === parent)
+                continue;
 
-                if (visited.has(edgy[edge].to) ||
-                    this.hasCycleHelper(edgy[edge].to, node, visited))
-                    return true;
-            }
+            if (visited.has(edge.to) ||
+                this.hasCycleHelper(edge.to, node, visited))
+                return true;
         }
 
         return false;

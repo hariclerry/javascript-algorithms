@@ -124,6 +124,26 @@ class BinarySearchTree {
 
     }
 
+    // Level order, while loop easy with queue
+
+    levelOrder = () => {
+        if (!this.root) return;
+        const queue = [this.root];
+        while (queue.length !== 0) {
+
+            const temp = queue.shift();
+            console.log('temmp', temp.value);
+            if (temp.left !== null) {
+                queue.push(temp.left)
+
+            }
+            if (temp.right !== null) {
+                queue.push(temp.right)
+            }
+
+        }
+    }
+
     // calculate tree height using preOrder Depth First traversal (Left, Right, Root)
     calculateRootHeight = () => {
         return this.calculateRootHeightHelper(this.root)
@@ -203,7 +223,7 @@ class BinarySearchTree {
     helperIsValidBST = (node, min, max) => {
         if (!node) return true
         if (node.data <= min || node.data >= max) return false
-        return this.helperIsValidBST(node.left, min, node.data) && this.helperIsValidBST(node.right, node.data, max)
+        return this.helperIsValidBST(node.left, min, node.data - 1) && this.helperIsValidBST(node.right, node.data + 1, max)
     }
 
     //Print Nodes at K distance
@@ -262,6 +282,8 @@ class BinarySearchTree {
             return 1 + this.helperNumberOfNonLeafNodes(root.left) + this.helperNumberOfNonLeafNodes(root.right)
 
         }
+
+
     }
 }
 

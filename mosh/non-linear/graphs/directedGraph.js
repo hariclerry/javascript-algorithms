@@ -17,6 +17,7 @@ class Graph {
     removeNode(value) {
         const hasVal = this.data.has(value)
         if (hasVal) {
+            this.removeEdge(value);
             this.data.delete(value)
         }
         return "Not found";
@@ -135,15 +136,104 @@ class Graph {
     // uses DFS and stack(last-in first-out)
     // array pop()
 
-    topologicalSort(start) {
-        let node = this.data.get(start)
-        if (!node) return
+    topologicalSort() {
+        const stack = [];
+        const visited = new Set();
+        console.log('node', this.data)
+        for (let [key, value] of this.data) {
+            this.topologicalSortHelper(key, visited, stack);
+        }
+        const sorted = [];
+        while (stack.length !== 0)
+            sorted.push(stack.pop());
 
-        let stack = []
-        let visited = new Set();
-        this.topologicalSortHelper(visited, start, stack)
+        return sorted;
+    }
 
-        return stack
+    topologicalSortHelper(node, visited, stack) {
+        if (visited.has(node))
+            return;
+
+        visited.add(node);
+
+        for (let neighbour of this.data.get(node))
+            this.topologicalSortHelper(neighbour, visited, stack);
+
+        stack.push(node);
+    }
+
+
+    hasCycle() {
+        const visited = {};
+        const recStack = {};
+
+        for (let [key, value] of this.data) {
+            if (this.hasCycleHelper(key, visited, recStack))
+                return 'there is a cycle'
+        }
+        return 'no cycle!'
+    }
+
+    hasCycleHelper(vertex, visited, recStack) {
+        if (!visited[vertex]) {
+            visited[vertex] = true;
+            recStack[vertex] = true;
+            const nodeNeighbors = this.data.get(vertex);
+            for (let neighbour of nodeNeighbors) {
+                if (!visited[neighbour] && this.hasCycleHelper(neighbour, visited, recStack)) {
+                    return true;
+                } else if (recStack[neighbour]) {
+                    return true;
+                }
+            }
+        }
+        recStack[vertex] = false;
+        return false;
+    }
+
+    hasCycle1() {
+        // Add all nodes
+        const all = new Set(this.data.keys());
+        // Keep track of all the nodes being visited and it's neighbor
+        const visiting = new Set();
+        // Keep track of all the nodes visited
+        const visited = new Set();
+
+        // Iterate all the nodes and pick the first node
+        while (all.size !== 0) {
+            let [current] = all; // Pick first node
+            if (this.hasCycleHelper1(current, all, visiting, visited)) // Depth first search
+                return true;
+        }
+        // No cycle and return false
+        return false;
+    }
+
+    hasCycleHelper1(node, all, visiting, visited) {
+        // remove node from all set
+        all.delete(node)
+        // add node to visiting set
+        visiting.add(node);
+
+        // Iterate and get neighbor
+        for (let neighbour of this.data.get(node)) {
+            // continue/jump to start of loop if neighbor is already visited
+            if (visited.has(neighbour))
+                continue;
+            // Return true if neighbor is in visiting while node is also in visiting
+            if (visiting.has(neighbour))
+                return true;
+            // Call method recursively and if it returns true, return
+            if (this.hasCycleHelper1(neighbour, all, visiting, visited))
+                return true;
+        }
+
+        // remove node from visiting set
+        visiting.delete(node);
+        // and add node to visited set
+        visited.add(node);
+        // If the while loop doesn't return true, return false
+        return false;
     }
 }
 

@@ -13,6 +13,8 @@ class newArray {
         return this.data[index];
     }
 
+
+
     //push method
     push = (item) => {
         // console.log('index+++++', index)

@@ -134,8 +134,8 @@ class SinglyLinkedList {
     }
     return this;
   }
-    
-    // Helper method to print reverse;
+
+  // Helper method to print reverse;
   print() {
     var arr = [];
     var current = this.head;
@@ -145,12 +145,104 @@ class SinglyLinkedList {
     }
     console.log(arr);
   }
+
+  // Alot of linked list problemes can be solved using two pointers
+
+  reverse = () => {
+    if (!this.head) return;
+    let previous = this.head;
+    let current = this.head.next;
+    while (current) {
+      const next = current.next;
+      current.next = previous;
+      previous = current;
+      current = next;
+
+    }
+    // remove and reset head
+    this.tail = this.head;
+    this.tail.next = null;
+    // make last the head
+    this.head = previous;
+  }
+
+  getKthNodeFromEnd = (k) => {
+    if (!this.head) return;
+
+    // two pointers
+    let first = this.head;
+    let second = this.head;
+
+    // move the second pointer to be k-1 distance from the first pointer
+    for (let i = 0; i < k - 1; i++) {
+      second = second.next;
+      // return if node exceeds number of nodes
+      if (second === null) return;
+    }
+    //iterate until the two pointers are properly positioned and move the pointers forward until the second pointer reaches the end of the list
+    while (second !== this.tail) {
+      first = first.next;
+      second = second.next
+    }
+    return first.value;
+  }
+  // [10 --> 50 --> 2 --> 8 --> 30 --> 4]
+  middleNode = () => {
+
+    if (!this.first) return;
+    // two pointers
+    let first = this.first;
+    let second = this.first;
+    while (second !== this.last && second.next !== this.last) {
+      // console.log("----", first)
+      first = first.next;
+      second = second.next.next;
+
+    }
+    // check to see if it's even or odd
+    if (second === this.last) {
+      return first.value;
+    } else return console.log(first.value, first.next.value);
+  }
+
+
+  hasLoop = () => {
+    let slow = this.first;
+    let fast = this.first;
+
+    while (fast && fast.next) {
+      slow = slow.next;
+      fast = fast.next.next;
+      if (fast === slow) return true;
+    }
+    return false;
+  }
+
 }
 
-var list = new SinglyLinkedList();
+const list = new SinglyLinkedList();
 
 list.push(100);
 list.push(201);
 list.push(250);
 list.push(350);
 list.push(999);
+
+// Create list with loop
+createWithLoop = () => {
+  const list = new SinglyLinkedList()
+  list.addLast(10);
+  list.addLast(20);
+  list.addLast(30);
+
+  // Get a reference to 30
+  var node = list.last;
+
+  list.addLast(40);
+  list.addLast(50);
+
+  // Create the loop
+  list.last.next = node;
+
+  return list;
+}

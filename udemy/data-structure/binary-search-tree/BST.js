@@ -65,6 +65,29 @@ class BinarySearchTree {
     }
     return false;
   }
+
+  closestValueBts(target) {
+    let current = this.root;
+    let diff = +Infinity;
+    let closestValue = 0;
+
+    while (current) {
+      let currentDiff = Math.abs(current.value - target)
+      if (currentDiff < diff) {
+        diff = currentDiff;
+        closestValue = current.value
+      }
+      if (target === current.value) {
+        return current.value;
+      } else if (target > current.value) {
+        current = current.right;
+      } else {
+        current = current.left;
+      }
+    }
+
+    return closestValue;
+  }
 }
 
 //      10
@@ -79,3 +102,4 @@ tree.insert(11);
 tree.insert(2);
 tree.insert(16);
 tree.insert(7);
+console.log(tree.closestValue(12));
